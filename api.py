@@ -4,16 +4,11 @@ import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 
-# метод __init__ используется для установки начальных значений атрибутов объектов,
-# которые будут создаваться в этом классе. base_url - это атрибут
 class PetFriends:
     def __init__(self):
         self.base_url = 'https://petfriends.skillfactory.ru'
 
 
-    # Метод для получения аутентификационного ключа, МЫ определяем названия переменных
-    # Для передачи данных в заголовке, создаётся словарь headers
-    # в кавычках - это точное название из документации, после : наши переменные
     def get_api_key(self, email: str, password: str) -> json:
         '''Метод делает запрос к API сервера и возвращает статус запроса и результат в формате JSON с уникальным
         ключом пользователя, найденным по указанным email и password'''
@@ -23,23 +18,11 @@ class PetFriends:
             'password': password
         }
 
-        # отправляем GET-запрос
-        # создаём переменную responce для записи в неё ответа от сервера
-        # get - тип запроса из документации, url - из документации,
-        # первый headers - это "ключевое слово", второй headers - это наш словарь
         responce = requests.get(self.base_url + '/api/key', headers = headers)
 
-        # status - переменная для сохранения статус-кода из ответа от сервера
-        # result = ""  - объявляем переменную для сохранения ответа от сервера
         status = responce.status_code
         result = ""
 
-        # присваиваем переменной result ответ от сервера в формате json
-        # на случай, если json извлечь не получилось, выведем в виде текста
-        # return используется для завершения работы функции/метода и возвращает указанные данные туда,
-        # где функция/метод вызывается
-        # исключение JSONDecodeError возникает при невозможности декодировать ответ в JSON формат. Можно оставить блок
-        # except пустым, но лучше указать конкретный тип исключения
         try:
             result = responce.json()
         except json.decoder.JSONDecodeError:
@@ -53,7 +36,6 @@ class PetFriends:
 
         headers = {'auth_key': auth_key['key']}
 
-        # по документации фильтр передаётся НЕ в заголовке, а в query
         filter = {'filter': filter}
 
         responce = requests.get(self.base_url + '/api/pets', headers=headers, params=filter)
@@ -153,7 +135,7 @@ class PetFriends:
 
         try:
             result = responce.json()
-            result['pet_photo'] = pet_photo # Добавляем ключ 'pet_photo' со значением pet_photo в результат
+            result['pet_photo'] = pet_photo
         except json.decoder.JSONDecodeError:
             result = responce.text
         print(status)
