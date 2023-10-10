@@ -135,7 +135,6 @@ class PetFriends:
 
         try:
             result = responce.json()
-            result['pet_photo'] = pet_photo
         except json.decoder.JSONDecodeError:
             result = responce.text
         print(status)
