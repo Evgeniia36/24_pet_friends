@@ -10,8 +10,8 @@ class PetFriends:
 
 
     def get_api_key(self, email: str, password: str) -> json:
-        '''Метод делает запрос к API сервера и возвращает статус запроса и результат в формате JSON с уникальным
-        ключом пользователя, найденным по указанным email и password'''
+        '''The method sends a request to the server's API and returns the request status and the result in JSON format
+        with a unique user key found using the specified email and password'''
 
         headers = {
             'email': email,
@@ -30,9 +30,9 @@ class PetFriends:
         return status, result
 
     def get_list_of_pets(self, auth_key: json, filter: str) -> json:
-        '''Метод делает запрос к API сервера и возвращает статус запроса и результат в формате JSON со списком
-        найденных питомцев, совпадающих с фильтром. Фильтр может иметь пустое значение - получить список всех
-        питомцев, либо my_pets - получить список собственных питомцев'''
+        '''The method sends a request to the server's API and returns the request status and the result in JSON format,
+        including a list of found pets that match the filter. The filter can have an empty value to get a list of all pets
+        or 'my_pets' to get a list of a user's own pets.'''
 
         headers = {'auth_key': auth_key['key']}
 
@@ -52,8 +52,8 @@ class PetFriends:
         return status, result
 
     def add_new_pet(self, auth_key: json, name: str, animal_type: str, age: str, pet_photo: str) -> json:
-        '''Метод делает POST запрос к API сервера на добавление нового питомца и возвращает статус запроса и
-        результат в формате JSON с данными о добавленном питомце.'''
+        '''The method sends a POST request to the server's API to add a new pet and returns the request status and the result
+        in JSON format with information about the added pet.'''
 
         data = MultipartEncoder(
             fields={
@@ -77,9 +77,9 @@ class PetFriends:
         return status, result
 
     def delete_pet(self, auth_key: json, pet_id: str) -> json:
-        """Метод отправляет на сервер DELETE запрос на удаление питомца по id и возвращает
-        статус запроса и результат в формате JSON с текстом уведомления об успешном удалении.
-        На сегодняшний день тут есть баг - в result приходит пустая строка, но status при этом = 200"""
+        """The method sends a DELETE request to the server to remove a pet by ID and returns the request status and the result
+        in JSON format with a success notification message. Currently, there is a bug where the 'result' field receives an empty string,
+        but the 'status' is still 200"""
 
         headers = {'auth_key': auth_key['key']}
 
@@ -98,8 +98,8 @@ class PetFriends:
 
     def update_pet_info(self, auth_key: json, pet_id: str, name: str,
                         animal_type: str, age: int) -> json:
-        """Метод отправляет PUT запрос на сервер об обновлении данных питомца по указанному id и
-        возвращает статус запроса и result в формате JSON с обновлёнными данными питомца"""
+        """The method sends a PUT request to the server to update pet data based on the specified ID and returns the request status
+        and 'result' in JSON format with the updated pet data."""
 
         headers = {'auth_key': auth_key['key']}
         data = {
@@ -122,8 +122,8 @@ class PetFriends:
         return status, result
 
     def add_photo_of_pet(self, auth_key: json, pet_id: str, pet_photo: str) -> json:
-        """Метод отправляет POST запрос на сервер, который добавляет фотографию к уже созданному питомцу по
-        его id и возвращает статус запроса и result в формате JSON с обновлёнными данными"""
+        """The method sends a POST request to the server to add a photo to an already created pet based on its ID
+        and returns the request status and 'result' in JSON format with the updated data"""
 
         headers = {'auth_key': auth_key['key']}
         file = {'pet_photo': (pet_photo, open(pet_photo, 'rb'), 'image/jpeg')}
@@ -141,8 +141,8 @@ class PetFriends:
         return status, result
 
     def add_new_pet_without_photo(self, auth_key: json, name: str, animal_type: str, age: str) -> json:
-        '''Метод делает POST запрос к API сервера на добавление нового питомца без фото, возвращает статус
-        запроса и результат в формате JSON с данными о питомце.'''
+        '''The method sends a POST request to the server's API to add a new pet without a photo and returns the request status
+        and the result in JSON format with pet data.'''
 
         data = MultipartEncoder(
             fields={
