@@ -1,5 +1,3 @@
-### Задание 24.7.2
+Testing of the REST API interface of the webapp: [PetFriends](https://petfriends.skillfactory.ru/)
 
-В проекте проводилось тестирование REST API-интерфейса ресурса: [PetFriends](https://petfriends.skillfactory.ru/)
-
-Используя документацию: [Swagger](https://petfriends.skillfactory.ru/apidocs/#/) , в файле *api.py* были реализованы все имеющиеся API-методы и в файле *test_pet_friends.py* составлены тест-кейсы для данного REST API-интерфейса.
+Using the documentation: [Swagger](https://petfriends.skillfactory.ru/apidocs/#/) , all available API methods were implemented in the *api.py* file, and test cases for this REST API interface were composed in the *test_pet_friends.py* file.
